@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Modulo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .api-container {
+            margin-bottom: 10px;
+        }
+
+        #apis-container {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Registro de Nuevo Módulo</h1>
+    <form th:action="@{/procesar-modulo}" th:object="${moduloForm}" method="post">
+        <!-- Campos básicos -->
+        <div>
+            <label>Desarrollador:</label>
+            <input type="text" th:field="*{desarrollador}" required>
+        </div>
+
+        <div>
+            <label>Nombre del Módulo:</label>
+            <input type="text" th:field="*{nombreModulo}" required>
+        </div>
+
+        <div>
+            <label>Ruta del Módulo:</label>
+            <input type="text" th:field="*{rutaModulo}" required>
+        </div>
+
+        <div>
+            <label>Javascript:</label>
+            <input type="text" th:field="*{javascript}" required>
+        </div>
+
+        <div>
+            <label>JSP:</label>
+            <input type="text" th:field="*{jsp}" required>
+        </div>
+
+        <div>
+            <label>POJO:</label>
+            <input type="text" th:field="*{pojo}" required>
+        </div>
+
+        <div>
+            <label>Servicios:</label>
+            <input type="text" th:field="*{servicio}" required>
+        </div>
+
+        <div>
+            <label>Repositorio:</label>
+            <input type="text" th:field="*{repositorio}" required>
+        </div>
+
+        <div>
+            <label>Controlador</label>
+            <input type="text" th:field="*{controlador}" required>
+        </div>
+
+        <div id="apis-container">
+            <label>APIs:</label>
+            <button type="button" id="agregar-api">+ Agregar API</button>
+            <div class="api-container">
+                <input type="text" name="apis" placeholder="Nombre API">
+                <button type="button" class="eliminar-api">Eliminar</button>
+            </div>
+        </div>
+
+        <button type="submit">Guardar Modulo</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            //Agregar nuevo campo API
+            $('#agregar-api').click(function () {
+                const newApi = `<div class="api-container">
+                        <input type="text" name="apis" placeholder="Nombre API">
+                        <button type="button" class="eliminar-api">Eliminar</button>
+                    </div>`;
+                $('#apis-container').append(newApi);
+            });
+
+            //Eliminar campo API
+            $(document).on('click', '.eliminar-api', function () {
+                $(this).parent().remove();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
+<!-- 
+    Campos dinámicos para APIs:
+    > Usa JavaScript/jQuery para agregar/eliminar campos
+    > Todos los campos "api" tienen el mismo nombre (name="apis") para que Spring los recoja como lista
+
+    Procesamiento en el servidor:
+    > El controlador recibe tanto el DTO como la lista separada de APIs
+    > Los datos se muestran en una página de confirmación
+-->

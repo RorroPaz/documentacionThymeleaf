@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <h1>Bienvenido <span th:text="${#authentication.name}">Usuario</span></h1>
+    <!-- Mostrar solo si es ADMIN -->
+    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <a th:href="@{/admin/crear-admin}">Panel de Administracion</a>
+    </div>
+
+    <!-- Formulario de logout -->
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Cerrar sesion</button>
+    </form>
+
+    <!-- Formulario de ejemplo (envia datos a /procesar-formulario) -->
+    <form th:action="@{/procesar-formulario}" method="post" th:object="${datoForm}">
+        <div>
+            <label for="mensaje">Ingresa un mensaje:</label>
+            <input type="text" id="mensaje" th:field="*{mensaje}">
+        </div>
+
+        <div>
+            <label for="prioridad">Prioridad</label>
+            <select id="prioridad" th:field="*{prioridad}">
+                <option value="ALTA">ALTA</option>
+                <option value="MEDIA">MEDIA</option>
+                <option value="BAJA">BAJA</option>
+            </select>
+        </div>
+        <button type="submit">Enviar</button>
+        <div th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+    </form>
+
+    <a th:href="@{/formulario-modulo}">Ir a formulario</a>
+    <!-- Mostar resultado si existe -->
+    <div th:if="${resultado}">
+        <h3>Respuesta del sevidor:</h3>
+        <p th:text="${resultado}"></p>
+    </div>
+</body>
+
+</html>
