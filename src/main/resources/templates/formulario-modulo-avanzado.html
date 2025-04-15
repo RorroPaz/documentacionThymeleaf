@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro de Módulo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .api-section {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .api-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .btn-remove-api {
+            background-color: #ff4444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Nuevo Módulo</h1>
+    
+    <form th:action="@{/procesar-modulo-avanzado}" th:object="${moduloForm}" method="post">
+        <!-- Campos básicos del módulo (se mantienen igual) -->
+         <!-- Campos básicos -->
+        <div>
+            <label>Desarrollador:</label>
+            <input type="text" th:field="*{desarrollador}" required>
+        </div>
+
+        <div>
+            <label>Nombre del Módulo:</label>
+            <input type="text" th:field="*{nombreModulo}" required>
+        </div>
+
+        <div>
+            <label>Ruta del Módulo:</label>
+            <input type="text" th:field="*{rutaModulo}" required>
+        </div>
+
+        <div>
+            <label>Javascript:</label>
+            <input type="text" th:field="*{javascript}" required>
+        </div>
+
+        <div>
+            <label>JSP:</label>
+            <input type="text" th:field="*{jsp}" required>
+        </div>
+
+        <div>
+            <label>POJO:</label>
+            <input type="text" th:field="*{pojo}" required>
+        </div>
+
+        <div>
+            <label>Servicios:</label>
+            <input type="text" th:field="*{servicio}" required>
+        </div>
+
+        <div>
+            <label>Repositorio:</label>
+            <input type="text" th:field="*{repositorio}" required>
+        </div>
+
+        <div>
+            <label>Controlador</label>
+            <input type="text" th:field="*{controlador}" required>
+        </div>
+        
+        <!-- Sección de APIs -->
+        <h2>APIs</h2>
+        <div id="apis-container">
+            <div class="api-section" th:each="api, iterStat : *{apis}">
+                <div class="api-header">
+                    <h3>API #<span th:text="${iterStat.index + 1}"></span></h3>
+                    <button type="button" class="btn-remove-api" th:if="${iterStat.index > 0}">Eliminar API</button>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nombre API:</label>
+                    <input type="text" th:field="*{apis[__${iterStat.index}__].nombreApi}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <select th:field="*{apis[__${iterStat.index}__].tipo}">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Ruta:</label>
+                    <input type="text" th:field="*{apis[__${iterStat.index}__].ruta}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Datos que regresa:</label>
+                    <textarea th:field="*{apis[__${iterStat.index}__].datosRegresa}" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Parámetros:</label>
+                    <input type="text" th:field="*{apis[__${iterStat.index}__].parametros}">
+                </div>
+                
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea th:field="*{apis[__${iterStat.index}__].descripcion}" rows="2"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Comentarios:</label>
+                    <textarea th:field="*{apis[__${iterStat.index}__].comentarios}" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" id="btn-add-api">+ Agregar otra API</button>
+        <button type="submit">Guardar Módulo</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            // Contador para nuevas APIs
+            let apiCounter = $('.api-section').length;
+            
+            // Agregar nueva API
+            $('#btn-add-api').click(function() {
+                const newIndex = apiCounter++;
+                const newApi = `
+                    <div class="api-section">
+                        <div class="api-header">
+                            <h3>API #${newIndex + 1}</h3>
+                            <button type="button" class="btn-remove-api">Eliminar API</button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Nombre API:</label>
+                            <input type="text" name="apis[${newIndex}].nombreApi" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Tipo:</label>
+                            <select name="apis[${newIndex}].tipo">
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ruta:</label>
+                            <input type="text" name="apis[${newIndex}].ruta" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Datos que regresa:</label>
+                            <textarea name="apis[${newIndex}].datosRegresa" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Parámetros:</label>
+                            <input type="text" name="apis[${newIndex}].parametros">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Descripción:</label>
+                            <textarea name="apis[${newIndex}].descripcion" rows="2"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Comentarios:</label>
+                            <textarea name="apis[${newIndex}].comentarios" rows="2"></textarea>
+                        </div>
+                    </div>`;
+                
+                $('#apis-container').append(newApi);
+            });
+            
+            // Eliminar API
+            $(document).on('click', '.btn-remove-api', function() {
+                $(this).closest('.api-section').remove();
+                // Reindexar los campos restantes si es necesario
+                apiCounter--;
+            });
+        });
+    </script>
+</body>
+</html>

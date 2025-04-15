@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.documentacion.proyecto.dto.ModuloDTO;
-
+ 
 @Controller
 public class ModuloController {
     @GetMapping("/formulario-modulo")
