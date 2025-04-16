@@ -17,17 +17,25 @@ public class ModuloAvanzadoController {
         ModuloAvanzadoDTO moduloADTO = new ModuloAvanzadoDTO();
         moduloADTO.getApis().add(new ApiDataDTO());
 
-        model.addAttribute("moduloForm",moduloADTO);
+        model.addAttribute("moduloForm", moduloADTO);
         return "formulario-modulo-avanzado";
     }
 
     @PostMapping("/procesar-modulo-avanzado")
     public String procesarFormulario(
-        @ModelAttribute("moduloForm") ModuloAvanzadoDTO moduloADTO,
-        Model model){
+            @ModelAttribute ModuloAvanzadoDTO moduloADTO,
+            Model model) {
 
+        System.out.println(moduloADTO.toString());
         System.out.println(moduloADTO.getApis());
         model.addAttribute("modulo", moduloADTO);
         return "resultadoAvanzado";
+    }
+
+    @PostMapping("/generar-pdf")
+    public String generaPdf(@ModelAttribute ModuloAvanzadoDTO moduloADTO) {
+        System.out.println("Datos: " + moduloADTO.toString());
+        System.out.println(moduloADTO.getApis());
+        return "redirect:/formulario-modulo-avanzado";
     }
 }
