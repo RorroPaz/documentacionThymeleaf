@@ -37,6 +37,9 @@ public class ModuloAvanzadoDTO {
     private String repositorio;
 
     @NotBlank
+    private String clasesUtiliza;
+
+    @NotBlank
     private String controlador;
 
     private List<ApiDataDTO> apis = new ArrayList<>(); //Para que exista un objeto antes de darle valores

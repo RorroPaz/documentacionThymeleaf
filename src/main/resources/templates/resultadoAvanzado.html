@@ -17,6 +17,7 @@
     
     <h2>APIs registradas:</h2>
     <p th:text="${modulo.desarrollador}"></p>
+    <p th:text="${modulo.clasesUtiliza}"></p>
     <div th:each="api : ${modulo.apis}" class="api-result">
         <h3 th:text="${api.nombreApi}"></h3>
         <p><strong>Tipo:</strong> <span th:text="${api.tipo}"></span></p>
@@ -38,6 +39,7 @@
         <input type="hidden" th:field="*{pojo}">
         <input type="hidden" th:field="*{servicio}">
         <input type="hidden" th:field="*{repositorio}">
+        <input type="hidden" th:field="*{clasesUtiliza}">
         <input type="hidden" th:field="*{controlador}">
         <div th:each="api, iterStat : *{apis}">
             <input type="hidden" th:field="*{apis[__${iterStat.index}__].nombreApi}">

@@ -61,10 +61,10 @@ public class ModuloAvanzadoController {
 
             // Cargar reporte principal
             System.out.println("2. Cargando reporte principal...");
-            InputStream principalStream = getClass().getResourceAsStream("/reportes/documento_modulo.jasper");
+            InputStream principalStream = getClass().getResourceAsStream("/reportes/documento.jasper");
             if (principalStream == null) {
                 System.err.println(
-                        "ERROR: No se pudo cargar el reporte principal. Verifica la ruta: /reportes/documento_modulo.jasper");
+                        "ERROR: No se pudo cargar el reporte principal. Verifica la ruta: /reportes/documento.jasper");
                 throw new FileNotFoundException("Reporte principal no encontrado");
             }
             System.out.println("✓ Reporte principal cargado correctamente");
@@ -82,9 +82,10 @@ public class ModuloAvanzadoController {
             parameters.put("javascript", moduloADTO.getJavascript());
             parameters.put("jsp", moduloADTO.getJsp());
             parameters.put("pojo", moduloADTO.getPojo());
-            parameters.put("serviceRepo", moduloADTO.getServicio());
-            parameters.put("serviceRepo", moduloADTO.getRepositorio());
-            parameters.put("serviceRepo", moduloADTO.getControlador());
+            parameters.put("servicio", moduloADTO.getServicio());
+            parameters.put("repositorio", moduloADTO.getRepositorio());
+            parameters.put("clasesUtiliza", moduloADTO.getClasesUtiliza());
+            parameters.put("controladores", moduloADTO.getControlador());
             System.out.println("✓ Parámetros básicos configurados");
 
             // Configurar datasource para subreportes
@@ -100,10 +101,10 @@ public class ModuloAvanzadoController {
 
             // Cargar subreporte
             System.out.println("5. Cargando subreporte...");
-            InputStream subStream = getClass().getResourceAsStream("/reportes/subreporte.jasper");
+            InputStream subStream = getClass().getResourceAsStream("/reportes/subreporteApi.jasper");
             if (subStream == null) {
                 System.err.println(
-                        "ERROR: No se pudo cargar el subreporte. Verifica la ruta: /reportes/subreporte.jasper");
+                        "ERROR: No se pudo cargar el subreporte. Verifica la ruta: /reportes/subreporteApi.jasper");
                 throw new FileNotFoundException("Subreporte no encontrado");
             }
             parameters.put("subreporteApi", subStream);

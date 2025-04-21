@@ -35,6 +35,11 @@
     <form th:action="@{/procesar-modulo-avanzado}" th:object="${moduloForm}" method="post">
         <!-- Campos básicos del módulo (se mantienen igual) -->
          <!-- Campos básicos -->
+         <div>
+            <label>Esta elaborando:</label>
+            <input type="text" th:field="*{desarrollador}" required>
+        </div>
+        
         <div>
             <label>Desarrollador:</label>
             <input type="text" th:field="*{desarrollador}" required>
@@ -73,6 +78,11 @@
         <div>
             <label>Repositorio:</label>
             <input type="text" th:field="*{repositorio}" required>
+        </div>
+
+        <div>
+            <label>Clases que utiliza</label>
+            <input type="text" th:field="*{clasesUtiliza}" required>
         </div>
 
         <div>
@@ -202,5 +212,7 @@
             });
         });
     </script>
+
+    <script th:src="@{/js/llenarFormulario.js}"></script>
 </body>
 </html>
