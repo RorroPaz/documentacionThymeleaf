@@ -1,0 +1,257 @@
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 7.0.2-31532122640f516c6d17238ae0e41a08113d5ac0  -->
+<jasperReport name="documento.jrxml" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0b20822f-f05b-4e67-9d32-085fc600c851">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NO_DATA_ADAPTER"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="desarrollador" class="java.lang.String"/>
+	<parameter name="apisDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subreporteApi" class="java.io.InputStream"/>
+	<parameter name="controladores" class="java.lang.String"/>
+	<parameter name="servicio" class="java.lang.String"/>
+	<parameter name="pojo" class="java.lang.String"/>
+	<parameter name="jsp" class="java.lang.String"/>
+	<parameter name="javascript" class="java.lang.String"/>
+	<parameter name="clasesUtiliza" class="java.lang.String"/>
+	<parameter name="rutaModulo" class="java.lang.String"/>
+	<parameter name="nombreModulo" class="java.lang.String"/>
+	<parameter name="repositorio" class="java.lang.String"/>
+	<parameter name="personaElaboro" class="java.lang.String"/>
+	<query language="sql"><![CDATA[]]></query>
+	<background splitType="Stretch"/>
+	<columnHeader height="84" splitType="Stretch">
+		<element kind="staticText" uuid="2292d394-fb05-4b37-ad64-83a770ab09a8" x="122" y="10" width="310" height="20" bold="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Sistema Integral de Administración de Pagos al Personal (SIAPP) ]]></text>
+		</element>
+		<element kind="staticText" uuid="4f61c34f-08ca-4102-9e9e-a2168b1c41f5" x="142" y="-5" width="277" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Documentacion  técnica de desarrollo]]></text>
+		</element>
+		<element kind="staticText" uuid="cff1789f-448d-4524-b58d-16734dd4615b" x="31" y="30" width="277" height="20" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Gerencia de Desarrollo de Sistemas Administrativos]]></text>
+		</element>
+		<element kind="staticText" uuid="558bbb97-3e72-4d1c-81d5-4a6198816900" x="32" y="47" width="100" height="20" bold="false" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Elaborado por:]]></text>
+		</element>
+		<element kind="textField" uuid="3ebc9ba9-77fc-40c3-baa2-8215fe5cb8f2" x="32" y="67" width="100" height="15" pattern="dd/MM/yyyy" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="textField" uuid="92cbf613-cb1c-4073-97db-403ece7f783b" x="100" y="47" width="150" height="20" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$P{personaElaboro}]]></expression>
+			<box leftPadding="4">
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+	</columnHeader>
+	<detail>
+		<band height="440" splitType="Stretch">
+			<element kind="rectangle" uuid="edec36ec-07e6-4017-8fa1-1aa912c71efe" x="30" y="10" width="500" height="20" backcolor="#C4BF72"/>
+			<element kind="staticText" uuid="a80be01a-98b9-4b63-acd8-20d53271f895" x="170" y="11" width="220" height="19" forecolor="#030000" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[DOCUMENTACIÓN TÉCNICA DEL MODULO ]]></text>
+			</element>
+			<element kind="rectangle" uuid="b38f7307-982e-47c9-bb6f-7531977debdc" positionType="Float" x="30" y="150" width="500" height="20" backcolor="#C4BF72"/>
+			<element kind="staticText" uuid="8a8f8da3-25ca-40f3-98ff-fa91340075fb" positionType="Float" stretchType="NoStretch" x="170" y="151" width="220" height="19" markup="none" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[ENFOQUE MODULAR ]]></text>
+			</element>
+			<element kind="staticText" uuid="5effc496-c4da-4673-9733-be9ac9379838" mode="Opaque" x="30" y="30" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Desarrollador ]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="60568e86-6da6-45ef-815e-f7369c7d4d09" positionType="Float" stretchType="NoStretch" x="130" y="30" width="400" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{desarrollador}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="855bc4da-8381-4ba8-b4cd-eb99098a125b" x="130" y="50" width="400" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{nombreModulo}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="1b29c4f3-d498-4675-b1e3-d8311e3e6135" mode="Opaque" x="30" y="50" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Nombre del Módulo ]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="c348a761-9691-40ea-99de-13ba6df7f3be" x="130" y="70" width="400" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{rutaModulo}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="02446554-ca90-4f54-975b-daeee9da10c4" mode="Opaque" x="30" y="70" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Ruta del Módulo ]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="c397a28b-00d1-4aa5-a914-b03c551eff7f" positionType="Float" x="130" y="170" width="150" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{javascript}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="bbf35605-05af-4d32-b27f-bedf77352ecf" positionType="Float" mode="Opaque" x="30" y="170" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[JavaScript ]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="98b43449-7e40-41b3-9bbe-44dc64a666a5" positionType="Float" x="130" y="190" width="400" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{pojo}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="ecebc15b-8461-4b2a-8d6b-977a40b17db3" positionType="Float" mode="Opaque" x="30" y="190" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[POJO ]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="741ddfe0-d0cd-499a-b5c5-432a5a918734" positionType="Float" x="380" y="170" width="150" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{jsp}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="d7cfc3b7-a806-4d24-a4a1-b535cd7236b9" positionType="Float" mode="Opaque" x="280" y="170" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[JSP ]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="efddc55b-afb9-4390-b2d5-05557641b78b" positionType="Float" x="380" y="210" width="150" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{repositorio}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="9f4f2d3d-9c3c-4704-9c44-4f5b2eb9b84c" positionType="Float" mode="Opaque" x="30" y="210" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Servicio]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="940ac361-45f5-4664-8026-79bad0d3f256" positionType="Float" x="130" y="230" width="400" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{controladores}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="c0b544ea-3f76-4f4f-97d9-5e4a54bb741d" positionType="Float" mode="Opaque" x="30" y="230" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Controladores ]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="subreport" uuid="afe2a212-9204-441d-8f94-21b92af84255" positionType="Float" x="30" y="250" width="500" height="190">
+				<parametersMapExpression><![CDATA[null]]></parametersMapExpression>
+				<dataSourceExpression><![CDATA[$P{apisDataSource}]]></dataSourceExpression>
+				<expression><![CDATA[$P{subreporteApi}]]></expression>
+			</element>
+			<element kind="textField" uuid="907c3163-5a92-4364-b144-81800a5c5cba" positionType="Float" x="130" y="210" width="150" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{servicio}]]></expression>
+				<box leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="c2ebbd23-145d-4b47-8722-21e668944d95" positionType="Float" mode="Opaque" x="280" y="210" width="100" height="20" backcolor="rgba(196, 191, 155, 0.49411765)" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Repositorio]]></text>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="frame" uuid="30a11813-4d78-4098-a588-d7c0cc19a411" positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="30" y="90" width="500" height="60" backcolor="#C4BF9B">
+				<element kind="textField" uuid="4217280f-74b9-4b23-9dcc-7a9273fe0e87" positionType="Float" mode="Opaque" x="100" y="0" width="400" height="59" markup="none" textAdjust="StretchHeight" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA[$P{clasesUtiliza}]]></expression>
+					<box leftPadding="10" rightPadding="9">
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="staticText" uuid="21555ec7-c76b-4f8b-b9cc-a8b423805d68" positionType="Float" stretchType="ContainerHeight" mode="Transparent" x="1" y="1" width="100" height="59" backcolor="rgba(3, 2, 0, 0.49411765)" markup="none" hTextAlign="Center" vTextAlign="Middle">
+					<text><![CDATA[Clases que utiliza ]]></text>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="56" splitType="Stretch">
+		<element kind="textField" uuid="b02f158e-db97-4fdc-89a7-ea295ffcf8ae" x="419" y="26" width="100" height="30" pattern="Página #00" hTextAlign="Right" vTextAlign="Bottom">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</columnFooter>
+</jasperReport>

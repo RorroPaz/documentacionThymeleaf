@@ -13,6 +13,9 @@ import lombok.ToString;
 @ToString
 public class ModuloAvanzadoDTO {
     @NotBlank
+    private String personaElaboro; //Persona que elaboro
+
+    @NotBlank
     private String desarrollador;
 
     @NotBlank

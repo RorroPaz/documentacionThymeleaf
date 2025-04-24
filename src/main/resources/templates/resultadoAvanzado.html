@@ -14,7 +14,7 @@
     <h1>Módulo Registrado</h1>
     
     <!-- Mostrar datos básicos del módulo -->
-    
+    <p th:text="${modulo.personaElaboro}"></p>
     <h2>APIs registradas:</h2>
     <p th:text="${modulo.desarrollador}"></p>
     <p th:text="${modulo.clasesUtiliza}"></p>
@@ -31,6 +31,7 @@
     <a th:href="@{/formulario-modulo-avanzado}">Regresar</a>
 
     <form th:action="@{/generar-pdf}" th:object="${modulo}" method="post">
+        <input type="hidden" th:field="*{personaElaboro}">
         <input type="hidden" th:field="*{desarrollador}">
         <input type="hidden" th:field="*{nombreModulo}">
         <input type="hidden" th:field="*{rutaModulo}">

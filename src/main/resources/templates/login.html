@@ -3,15 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocumentHub - Login</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/iconoSistemaDoc.ico}"> 
+    <style>
+        :root {
+            --docuhub-primary: #2563EB;
+            --docuhub-primary-light: #3B82F6;
+            --docuhub-dark: #1F2937;
+            --docuhub-light: #F3F4F6;
+            --docuhub-white: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--docuhub-dark);
+            padding: 1rem;
+        }
+
+        h2 {
+            color: var(--docuhub-white);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(31, 41, 55, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        input {
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--docuhub-white);
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(31, 41, 55, 0.1);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        input:focus {
+            outline: 2px solid var(--docuhub-primary-light);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+        }
+
+        button {
+            padding: 0.8rem;
+            background: var(--docuhub-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+            width: 100%;
+        }
+
+        button:hover {
+            background: var(--docuhub-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        a {
+            color: var(--docuhub-white);
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Adaptaciones para móviles pequeños */
+        @media (max-width: 480px) {
+            form {
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+            
+            input, button {
+                padding: 0.7rem;
+            }
+            
+            h2 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Efecto de teclado en móviles */
+        @media (max-height: 600px) {
+            body {
+                justify-content: flex-start;
+                padding-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>DocumentHub</h2>
+    </div>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar sesión</button>
+        <a th:href="@{/registro}">¿No tienes cuenta? Regístrate</a>
+    </form>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="shortcut icon" href="/iconoSistemaDoc.ico" />
     <title>Login</title>
 </head>
 <body>
     <form th:action="@{/login}" method="post">
+        <div>
+            <h2>DocumentHub</h2>
+        </div>
         <input type="text" name="username" placeholder="Usuario" required>
         <input type="password" name="password" placeholder="Constraseña" required>
         <button type="submit">Login</button>
         <a th:href="@{/registro}">Registrarse</a>
     </form>
+
 </body>
-</html>
+</html> -->

@@ -12,15 +12,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.documentacion.proyecto.dto.ApiDataDTO;
 import com.documentacion.proyecto.dto.ModuloAvanzadoDTO;
 
+import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
@@ -46,15 +50,10 @@ public class ModuloAvanzadoController {
         return "resultadoAvanzado";
     }
 
-    // @PostMapping("/generar-pdf")
-    // public String generaPdf(@ModelAttribute ModuloAvanzadoDTO moduloADTO) {
-    //     System.out.println("Datos: " + moduloADTO.toString());
-    //     System.out.println(moduloADTO.getApis());
-    //     return "redirect:/formulario-modulo-avanzado";
-    // }
-
     @PostMapping("/generar-pdf")
-    public ResponseEntity<byte[]> generaPdf(@ModelAttribute ModuloAvanzadoDTO moduloADTO) {
+    public ResponseEntity<byte[]> generaPdf(
+        @ModelAttribute ModuloAvanzadoDTO moduloADTO
+        ) {
         try {
             System.out.println(moduloADTO.toString());
             System.out.println("1. Iniciando generación de reporte...");
@@ -71,11 +70,13 @@ public class ModuloAvanzadoController {
 
             // Preparar parámetros
             System.out.println("3. Preparando parámetros...");
+            System.out.println("Persona que elaboro"+moduloADTO.getPersonaElaboro());
             System.out.println("desarrollador: " + moduloADTO.getDesarrollador());
             System.out.println("nombreModulo: " + moduloADTO.getNombreModulo());
             System.out.println("rutaModulo: " + moduloADTO.getRutaModulo());
 
             Map<String, Object> parameters = new HashMap<>();
+            parameters.put("personaElaboro", moduloADTO.getPersonaElaboro());
             parameters.put("desarrollador", moduloADTO.getDesarrollador());
             parameters.put("nombreModulo", moduloADTO.getNombreModulo());
             parameters.put("rutaModulo", moduloADTO.getRutaModulo());
@@ -147,4 +148,62 @@ public class ModuloAvanzadoController {
             throw new RuntimeException("Error general", e);
         }
     }
+
+
+    // @PostMapping("/generar-pdf")
+    // public void generarPDF(@ModelAttribute ModuloAvanzadoDTO moduloADTO, HttpServletResponse response) {
+    //     try {
+    //         // 1. Compilar reporte principal
+    //         System.out.println("📄 Compilando documento.jrxml...");
+    //         InputStream jrxmlPrincipal = getClass().getResourceAsStream("/reportes/documento.jrxml");
+    //         if (jrxmlPrincipal == null) {
+    //             throw new FileNotFoundException("No se encontró el archivo /reportes/documento.jrxml");
+    //         }
+    //         JasperReport reportePrincipal = JasperCompileManager.compileReport(jrxmlPrincipal);
+    //         System.out.println("✓ Reporte principal compilado");
+
+    //         // 2. Compilar subreporte
+    //         System.out.println("📄 Compilando subreporteApi.jrxml...");
+    //         InputStream jrxmlSubreporte = getClass().getResourceAsStream("/reportes/subreporteApi.jrxml");
+    //         if (jrxmlSubreporte == null) {
+    //             throw new FileNotFoundException("No se encontró el subreporte /reportes/subreporteApi.jrxml");
+    //         }
+    //         JasperReport subreporteCompilado = JasperCompileManager.compileReport(jrxmlSubreporte);
+    //         System.out.println("✓ Subreporte compilado");
+
+    //         // 3. Parámetros del reporte
+    //         Map<String, Object> parameters = new HashMap<>();
+    //         parameters.put("personaElaboro", moduloADTO.getPersonaElaboro());
+    //         parameters.put("desarrollador", moduloADTO.getDesarrollador());
+    //         parameters.put("nombreModulo", moduloADTO.getNombreModulo());
+    //         parameters.put("rutaModulo", moduloADTO.getRutaModulo());
+    //         parameters.put("javascript", moduloADTO.getJavascript());
+    //         parameters.put("jsp", moduloADTO.getJsp());
+    //         parameters.put("pojo", moduloADTO.getPojo());
+    //         parameters.put("servicio", moduloADTO.getServicio());
+    //         parameters.put("repositorio", moduloADTO.getRepositorio());
+    //         parameters.put("clasesUtiliza", moduloADTO.getClasesUtiliza());
+    //         parameters.put("controladores", moduloADTO.getControlador());
+    //         parameters.put("subreporteApi", subreporteCompilado);
+
+    //         // 4. Fuente de datos principal (lista de APIs para el subreporte)
+    //         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(moduloADTO.getApis());
+
+    //         // 5. Llenar el reporte
+    //         JasperPrint jasperPrint = JasperFillManager.fillReport(reportePrincipal, parameters, dataSource);
+
+    //         // 6. Configurar respuesta HTTP
+    //         response.setContentType("application/pdf");
+    //         response.setHeader("Content-Disposition", "inline; filename=reporte_modulo.pdf");
+
+    //         // 7. Exportar el PDF al output stream de la respuesta
+    //         JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+
+    //         response.getOutputStream().flush();
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         throw new RuntimeException("Error al generar el reporte PDF: " + e.getMessage());
+    //     }
+    // }
+
 }
