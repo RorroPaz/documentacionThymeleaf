@@ -221,7 +221,7 @@
                             <i class="fas fa-arrow-left mr-2"></i> Editar
                         </a> -->
                         <!-- Corroborar que sea el objeto que la pagina recibe -->
-                        <form th:action="@{/editar}" th:object="${modulo}" method="post">
+                        <form th:action="@{/editar}" th:object="${modulo}" method="post" class="w-full sm:w-auto">
                             <input type="hidden" th:field="*{personaElaboro}">
                             <input type="hidden" th:field="*{desarrollador}">
                             <input type="hidden" th:field="*{nombreModulo}">
@@ -242,7 +242,7 @@
                                 <input type="hidden" th:field="*{apis[__${iterStat.index}__].descripcion}">
                                 <input type="hidden" th:field="*{apis[__${iterStat.index}__].comentarios}">
                             </div>
-                            <button type="submit" class="inline-flex items-center justify-center px-6 py-2 border border-transparent rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition">
+                            <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-2 border border-transparent rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition">
                                 <i class="fas fa-pen-alt mr-2"></i> Editar
                             </button>
                         </form>
