@@ -1,5 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importar la fuente Inter desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="/iconoSistemaDoc.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Registro - DocumentHub</title>
+    <style>
+        .logo-text {
+            background: linear-gradient(to right, #3B82F6, #2563EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4 font-['Inter']">
+    <!-- Logo y Título -->
+    <div class="flex flex-col items-center mb-10 z-10">
+        <!-- Contenedor del logo con imagen -->
+        <div class="w-20 h-20 mb-4 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]">
+           <img th:src="@{/img/iconoSistemaDoc.png}" alt="Logo DocumentHub" class="w-full h-full object-contain">
+       </div>
+
+       <!-- Título con efecto de gradiente -->
+       <h1 class="text-4xl font-bold logo-text tracking-tight mb-1">DocumentHub</h1>
+       <p class="text-gray-500 text-sm font-medium">Crear nueva cuenta</p>
+   </div>
+
+    <!-- Formulario de Registro -->
+    <form th:action="@{/registro}" th:object="${usuario}" method="post"
+        class="bg-white rounded-xl p-8 max-w-md w-full space-y-5 shadow-md border border-gray-100">
+        <div class="space-y-4">
+            <input th:field="*{nombre}" type="text" placeholder="Nombre completo" required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 text-gray-700 placeholder-gray-400 transition-all">
+            
+            <input th:field="*{username}" type="text" placeholder="Nombre de usuario" required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 text-gray-700 placeholder-gray-400 transition-all">
+            
+            <input th:field="*{password}" type="password" placeholder="Contraseña" required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 text-gray-700 placeholder-gray-400 transition-all">
+        </div>
+
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white">
+            Registrarse
+        </button>
+
+        <div class="text-center pt-2">
+            <a th:href="@{/login}" class="text-gray-500 hover:text-blue-500 text-sm font-medium transition-colors">
+                ¿Ya tienes cuenta? Inicia sesión
+            </a>
+        </div>
+    </form>
+</body>
+
+</html>
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,5 +83,5 @@
         <button type="submit">Registrarse</button>
     </form>
 </body>
-</html>
+</html> -->
 <!-- @{} ${} *{} -->

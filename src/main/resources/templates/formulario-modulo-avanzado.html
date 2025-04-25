@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Registro de Módulo - DocumentHub</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -7,44 +8,41 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
         }
-        
-        .logo-placeholder {
-            width: 180px;
-            height: 40px;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-weight: 500;
-            border-radius: 4px;
-        }
     </style>
 </head>
+
 <body class="bg-gray-50 min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-white shadow-sm">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <!-- Espacio para el logo -->
-                <div>
-                    <img th:src="@{/img/iconoSistemaDoc.png}" width="40px">
-                </div>
+                <!-- Logo con enlace al Dashboard -->
+                <a th:href="@{/dashboard}" class="flex items-center">
+                    <img th:src="@{/img/iconoSistemaDoc.png}" width="40px" alt="Logo DocumentHub" class="hover:opacity-80 transition-opacity">
+                </a>
                 <h1 class="text-xl font-semibold text-gray-800 hidden md:block">DocumentHub</h1>
             </div>
-            
+
             <div class="flex items-center space-x-4">
-                <span class="text-sm text-gray-600 hidden md:block">Bienvenido, <span class="font-medium" th:text="${username}">Usuario</span></span>
-                <div class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition">
-                    <!-- Formulario de logout -->
+                <!-- Botón Dashboard -->
+                <a th:href="@{/dashboard}"
+                    class="bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition">
+                    <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                </a>
+
+                <!-- Botón Cerrar Sesión (opcional) -->
+
+                <div
+                    class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition">
                     <form th:action="@{/logout}" method="post">
-                        <button type="submit"><i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesion</button>
+                        <button type="submit"><i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </header>
@@ -56,161 +54,170 @@
                 <h1 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-cube mr-3 text-blue-500"></i> Registro de Nuevo Módulo
                 </h1>
-                
-                <form th:action="@{/procesar-modulo-avanzado}" th:object="${moduloForm}" method="post" class="space-y-6">
+
+                <form th:action="@{/procesar-modulo-avanzado}" th:object="${moduloForm}" method="post"
+                    class="space-y-6">
                     <!-- Campos básicos del módulo -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Columna 1 -->
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Elaborado por:</label>
-                                <input type="text" th:field="*{personaElaboro}" 
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                <input type="text" th:field="*{personaElaboro}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
-                            
+
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Desarrollador:</label>
                                 <input type="text" th:field="*{desarrollador}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Módulo:</label>
                                 <input type="text" th:field="*{nombreModulo}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Ruta del Módulo:</label>
                                 <input type="text" th:field="*{rutaModulo}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Javascript:</label>
                                 <input type="text" th:field="*{javascript}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
                         </div>
-                        
+
                         <!-- Columna 2 -->
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">JSP:</label>
                                 <input type="text" th:field="*{jsp}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">POJO:</label>
                                 <input type="text" th:field="*{pojo}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Servicios:</label>
                                 <input type="text" th:field="*{servicio}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Repositorio:</label>
                                 <input type="text" th:field="*{repositorio}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Clases que utiliza:</label>
                                 <input type="text" th:field="*{clasesUtiliza}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Controlador:</label>
                                 <input type="text" th:field="*{controlador}" required
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Sección de APIs -->
                     <div class="mt-8">
                         <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                             <i class="fas fa-plug mr-2 text-blue-500"></i> APIs
                         </h2>
-                        
+
                         <div id="apis-container" class="space-y-6">
-                            <div class="api-section bg-gray-50 border border-gray-200 rounded-xl p-6" th:each="api, iterStat : *{apis}">
+                            <div class="api-section bg-gray-50 border border-gray-200 rounded-xl p-6"
+                                th:each="api, iterStat : *{apis}">
                                 <div class="api-header flex justify-between items-center mb-4">
                                     <h3 class="text-lg font-medium text-gray-800 flex items-center">
-                                        <i class="fas fa-code-branch mr-2 text-blue-500"></i> API #<span th:text="${iterStat.index + 1}"></span>
+                                        <i class="fas fa-code-branch mr-2 text-blue-500"></i> API #<span
+                                            th:text="${iterStat.index + 1}"></span>
                                     </h3>
-                                    <button type="button" class="btn-remove-api bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm flex items-center transition" th:if="${iterStat.index > 0}">
+                                    <button type="button"
+                                        class="btn-remove-api bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm flex items-center transition"
+                                        th:if="${iterStat.index > 0}">
                                         <i class="fas fa-trash mr-1"></i> Eliminar
                                     </button>
                                 </div>
-                                
+
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="form-group">
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre API:</label>
                                         <input type="text" th:field="*{apis[__${iterStat.index}__].nombreApi}" required
-                                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Tipo:</label>
                                         <select th:field="*{apis[__${iterStat.index}__].tipo}"
-                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                                             <option value="GET">GET</option>
                                             <option value="POST">POST</option>
                                             <option value="PUT">PUT</option>
                                             <option value="DELETE">DELETE</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Ruta:</label>
                                         <input type="text" th:field="*{apis[__${iterStat.index}__].ruta}" required
-                                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Parámetros:</label>
                                         <input type="text" th:field="*{apis[__${iterStat.index}__].parametros}"
-                                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                                     </div>
-                                    
+
                                     <div class="form-group md:col-span-2">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Datos que regresa:</label>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Datos que
+                                            regresa:</label>
                                         <textarea th:field="*{apis[__${iterStat.index}__].datosRegresa}" rows="3"
-                                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
                                     </div>
-                                    
+
                                     <div class="form-group md:col-span-2">
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Descripción:</label>
                                         <textarea th:field="*{apis[__${iterStat.index}__].descripcion}" rows="2"
-                                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
                                     </div>
-                                    
+
                                     <div class="form-group md:col-span-2">
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Comentarios:</label>
                                         <textarea th:field="*{apis[__${iterStat.index}__].comentarios}" rows="2"
-                                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <button type="button" id="btn-add-api" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center transition">
+
+                        <button type="button" id="btn-add-api"
+                            class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center transition">
                             <i class="fas fa-plus mr-2"></i> Agregar otra API
                         </button>
                     </div>
-                    
+
                     <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
-                        <button type="reset" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                        <button type="reset"
+                            class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
                             Limpiar
                         </button>
-                        <button type="submit" class="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center transition">
+                        <button type="submit"
+                            class="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center transition">
                             <i class="fas fa-save mr-2"></i> Guardar Módulo
                         </button>
                     </div>
@@ -222,26 +229,27 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 py-4">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="flex flex-col md:flex-row justify-center items-center">
+                <!-- <div class="flex flex-col md:flex-row justify-between items-center"> -->
                 <div class="mb-4 md:mb-0">
-                    <p class="text-sm text-gray-600">© 2023 DocumentHub. Todos los derechos reservados.</p>
+                    <p class="text-sm text-gray-600">© 2025 DocumentHub. Todos los derechos reservados.</p>
                 </div>
-                <div class="flex space-x-6">
+                <!-- <div class="flex space-x-6">
                     <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Términos de servicio</a>
                     <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Política de privacidad</a>
                     <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Contacto</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </footer>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Contador para nuevas APIs
             let apiCounter = $('.api-section').length;
-            
+
             // Agregar nueva API
-            $('#btn-add-api').click(function() {
+            $('#btn-add-api').click(function () {
                 const newIndex = apiCounter++;
                 const newApi = `
                     <div class="api-section bg-gray-50 border border-gray-200 rounded-xl p-6">
@@ -303,22 +311,22 @@
                             </div>
                         </div>
                     </div>`;
-                
+
                 $('#apis-container').append(newApi);
                 $('html, body').animate({
                     scrollTop: $(document).height()
                 }, 'slow');
             });
-            
+
             // Eliminar API
-            $(document).on('click', '.btn-remove-api', function() {
-                $(this).closest('.api-section').fadeOut(300, function() {
+            $(document).on('click', '.btn-remove-api', function () {
+                $(this).closest('.api-section').fadeOut(300, function () {
                     $(this).remove();
                     // Reindexar los campos restantes si es necesario
                     apiCounter--;
-                    
+
                     // Renumerar las APIs
-                    $('.api-section').each(function(index) {
+                    $('.api-section').each(function (index) {
                         $(this).find('h3 span').text(index + 1);
                     });
                 });
@@ -327,6 +335,7 @@
     </script>
 
 </body>
+
 </html>
 
 <!-- <!DOCTYPE html>
@@ -546,3 +555,28 @@
 
 </body>
 </html> -->
+
+<form th:action="@{/generar-pdf}" th:object="${modulo}" method="post">
+    <input type="hidden" th:field="*{personaElaboro}">
+    <input type="hidden" th:field="*{desarrollador}">
+    <input type="hidden" th:field="*{nombreModulo}">
+    <input type="hidden" th:field="*{rutaModulo}">
+    <input type="hidden" th:field="*{javascript}">
+    <input type="hidden" th:field="*{jsp}">
+    <input type="hidden" th:field="*{pojo}">
+    <input type="hidden" th:field="*{servicio}">
+    <input type="hidden" th:field="*{repositorio}">
+    <input type="hidden" th:field="*{clasesUtiliza}">
+    <input type="hidden" th:field="*{controlador}">
+    <div th:each="api, iterStat : *{apis}">
+        <input type="hidden" th:field="*{apis[__${iterStat.index}__].nombreApi}">
+        <input type="hidden" th:field="*{apis[__${iterStat.index}__].tipo}">
+        <input type="hidden" th:field="*{apis[__${iterStat.index}__].ruta}">
+        <input type="hidden" th:field="*{apis[__${iterStat.index}__].datosRegresa}">
+        <input type="hidden" th:field="*{apis[__${iterStat.index}__].parametros}">
+        <input type="hidden" th:field="*{apis[__${iterStat.index}__].descripcion}">
+        <input type="hidden" th:field="*{apis[__${iterStat.index}__].comentarios}">
+    </div>
+
+    <button type="submit">Crear PDF</button>
+</form>

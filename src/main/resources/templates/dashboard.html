@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -9,17 +9,17 @@
 
 <body>
     <h1>Bienvenido <span th:text="${#authentication.name}">Usuario</span></h1>
-    <!-- Mostrar solo si es ADMIN -->
+     Mostrar solo si es ADMIN
     <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
         <a th:href="@{/admin/crear-admin}">Panel de Administracion</a>
     </div>
 
-    <!-- Formulario de logout -->
+     Formulario de logout 
     <form th:action="@{/logout}" method="post">
         <button type="submit">Cerrar sesion</button>
     </form>
 
-    <!-- Formulario de ejemplo (envia datos a /procesar-formulario) -->
+    Formulario de ejemplo (envia datos a /procesar-formulario) 
     <form th:action="@{/procesar-formulario}" method="post" th:object="${datoForm}">
         <div>
             <label for="mensaje">Ingresa un mensaje:</label>
@@ -42,11 +42,179 @@
 
     <a th:href="@{/formulario-modulo}">Ir a formulario</a>
     <a th:href="@{/formulario-modulo-avanzado}">Ir al formulario avanzado</a>
-    <!-- Mostar resultado si existe -->
+    Mostar resultado si existe
     <div th:if="${resultado}">
         <h3>Respuesta del sevidor:</h3>
         <p th:text="${resultado}"></p>
     </div>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DocumentHub</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="/iconoSistemaDoc.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <!-- Logo con enlace al Dashboard -->
+                <a th:href="@{/dashboard}" class="flex items-center">
+                    <img th:src="@{/img/iconoSistemaDoc.png}" width="40px" alt="Logo DocumentHub" class="hover:opacity-80 transition-opacity">
+                </a>
+                <h1 class="text-xl font-semibold text-gray-800 hidden md:block">DocumentHub</h1>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-gray-600 hidden md:block">Hola, <span class="font-medium" th:text="${#authentication.name}">Usuario</span></span>
+                
+                <div class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition">
+                    <!-- Formulario de logout -->
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit"><i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-8 max-w-5xl">
+            <!-- Panel de bienvenida -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h1 class="text-2xl font-bold text-gray-800 mb-2 flex items-center">
+                    <i class="fas fa-tachometer-alt mr-3 text-blue-500"></i> Panel de Control
+                </h1>
+                <p class="text-gray-600 mb-6">Gestiona tus documentos y módulos desde este panel</p>
+                
+                <!-- Acciones rápidas -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <!-- Mostrar solo si es ADMIN -->
+                    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="bg-blue-50 border border-blue-100 rounded-lg p-4 hover:bg-blue-100 transition cursor-pointer">
+                        <a th:href="@{/admin/crear-admin}" class="flex items-center">
+                            <div class="bg-blue-500 text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-blue-800">Panel de Administración</h3>
+                                <p class="text-sm text-blue-600">Configuración del sistema</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-green-50 border border-green-100 rounded-lg p-4 hover:bg-green-100 transition cursor-pointer">
+                        <a th:href="@{/formulario-modulo}" class="flex items-center">
+                            <div class="bg-green-500 text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-green-800">Formulario Básico</h3>
+                                <p class="text-sm text-green-600">Registro de módulos</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-100 rounded-lg p-4 hover:bg-purple-100 transition cursor-pointer">
+                        <a th:href="@{/formulario-modulo-avanzado}" class="flex items-center">
+                            <div class="bg-purple-500 text-white p-3 rounded-lg mr-4">
+                                <i class="fas fa-file-code"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-purple-800">Formulario Avanzado</h3>
+                                <p class="text-sm text-purple-600">Registro completo</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Formulario de ejemplo -->
+                <div class="border-t border-gray-200 pt-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-paper-plane mr-2 text-blue-500"></i> Enviar Mensaje
+                    </h2>
+                    
+                    <form th:action="@{/procesar-formulario}" method="post" th:object="${datoForm}" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Ingresa un mensaje:</label>
+                            <input type="text" id="mensaje" th:field="*{mensaje}" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Prioridad:</label>
+                            <select id="prioridad" th:field="*{prioridad}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                <option value="ALTA">ALTA</option>
+                                <option value="MEDIA">MEDIA</option>
+                                <option value="BAJA">BAJA</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex justify-end">
+                            <button type="submit" class="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg flex items-center transition">
+                                <i class="fas fa-paper-plane mr-2"></i> Enviar
+                            </button>
+                        </div>
+                        
+                        <div th:if="${#fields.hasErrors('*')}" class="bg-red-50 border-l-4 border-red-500 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-red-700" th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Mostrar resultado si existe -->
+                <div th:if="${resultado}" class="mt-8 bg-green-50 border-l-4 border-green-500 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-green-800">Respuesta del servidor:</h3>
+                            <p class="text-sm text-green-700 mt-1" th:text="${resultado}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm text-gray-600">© 2025 DocumentHub. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

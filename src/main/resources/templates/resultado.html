@@ -1,5 +1,166 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Registrado - DocumentHub</title>
+    <link rel="shortcut icon" href="/iconoSistemaDoc.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <!-- Logo -->
+                <div>
+                    <img th:src="@{/img/iconoSistemaDoc.png}" width="40px">
+                </div>
+                <h1 class="text-xl font-semibold text-gray-800 hidden md:block">DocumentHub</h1>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <!-- Botón Dashboard -->
+                <a th:href="@{/dashboard}"
+                    class="bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition">
+                    <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                </a>
+
+                <!-- Botón Regresar -->
+                <a th:href="@{/formulario-modulo-avanzado}"
+                    class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition">
+                    <i class="fas fa-arrow-left mr-2"></i> Regresar
+                </a>
+
+                <!-- Botón Cerrar Sesión (opcional) -->
+                <!--
+            <div class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit"><i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión</button>
+                </form>
+            </div>
+            -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-8 max-w-3xl">
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <!-- Encabezado con icono de éxito -->
+                <div class="text-center mb-8">
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                        <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2">Módulo Registrado Exitosamente</h1>
+                    <p class="text-gray-600">Los detalles del módulo se han guardado correctamente.</p>
+                </div>
+
+                <!-- Detalles del módulo -->
+                <div class="border border-gray-200 rounded-lg divide-y divide-gray-200 mb-8">
+                    <div class="px-6 py-4">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                            <i class="fas fa-info-circle text-blue-500 mr-2"></i> Información Básica
+                        </h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Desarrollador</p>
+                                <p class="mt-1 text-sm text-gray-900" th:text="${modulo.desarrollador}"></p>
+                            </div>
+
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Nombre del Módulo</p>
+                                <p class="mt-1 text-sm text-gray-900" th:text="${modulo.nombreModulo}"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de APIs -->
+                    <div class="px-6 py-4">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                            <i class="fas fa-plug text-blue-500 mr-2"></i> APIs Registradas
+                        </h3>
+
+                        <div th:each="api, iterStat : ${modulo.apis}" class="mb-6 last:mb-0">
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-medium text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-code-branch text-blue-500 mr-2"></i> API #<span
+                                        th:text="${iterStat.index + 1}"></span>
+                                </h4>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-xs font-medium text-gray-500">Nombre API</p>
+                                        <p class="mt-1 text-sm text-gray-900" th:text="${api.nombreApi}"></p>
+                                    </div>
+
+                                    <div>
+                                        <p class="text-xs font-medium text-gray-500">Tipo</p>
+                                        <p class="mt-1 text-sm text-gray-900" th:text="${api.tipo}"></p>
+                                    </div>
+
+                                    <div>
+                                        <p class="text-xs font-medium text-gray-500">Ruta</p>
+                                        <p class="mt-1 text-sm text-gray-900" th:text="${api.ruta}"></p>
+                                    </div>
+
+                                    <div>
+                                        <p class="text-xs font-medium text-gray-500">Parámetros</p>
+                                        <p class="mt-1 text-sm text-gray-900" th:text="${api.parametros ?: 'N/A'}"></p>
+                                    </div>
+
+                                    <div class="md:col-span-2">
+                                        <p class="text-xs font-medium text-gray-500">Descripción</p>
+                                        <p class="mt-1 text-sm text-gray-900" th:text="${api.descripcion ?: 'N/A'}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a th:href="@{/formulario-modulo}"
+                        class="inline-flex items-center justify-center px-6 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition">
+                        <i class="fas fa-plus mr-2"></i> Registrar otro módulo
+                    </a>
+                    <a th:href="@{/dashboard}"
+                        class="inline-flex items-center justify-center px-6 py-2 border border-transparent rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition">
+                        <i class="fas fa-tachometer-alt mr-2"></i> Ir al Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm text-gray-600">© 2025 DocumentHub. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,4 +178,4 @@
 
     <a th:href="@{/formulario-modulo}">Regresar</a>
 </body>
-</html>
+</html> -->

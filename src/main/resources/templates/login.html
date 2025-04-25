@@ -1,145 +1,113 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocumentHub - Login</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/img/iconoSistemaDoc.ico}"> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="/iconoSistemaDoc.ico" />
+    <title>Login - DocumentHub</title>
     <style>
-        :root {
-            --docuhub-primary: #2563EB;
-            --docuhub-primary-light: #3B82F6;
-            --docuhub-dark: #1F2937;
-            --docuhub-light: #F3F4F6;
-            --docuhub-white: rgba(255, 255, 255, 0.9);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            color: var(--docuhub-dark);
-            padding: 1rem;
+            font-family: 'Inter', sans-serif;
         }
 
-        h2 {
-            color: var(--docuhub-white);
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-50vh) translateX(20px); }
+            100% { transform: translateY(-100vh) translateX(0); }
         }
-
-        form {
-            width: 100%;
-            max-width: 400px;
-            padding: clamp(1.5rem, 5vw, 2.5rem);
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(31, 41, 55, 0.2);
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(59, 130, 246, 0.15);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float linear infinite;
         }
-
-        input {
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 8px;
-            background: var(--docuhub-white);
-            font-size: 1rem;
-            box-shadow: 0 2px 4px rgba(31, 41, 55, 0.1);
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        input:focus {
-            outline: 2px solid var(--docuhub-primary-light);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
-        }
-
-        button {
-            padding: 0.8rem;
-            background: var(--docuhub-primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
-            width: 100%;
-        }
-
-        button:hover {
-            background: var(--docuhub-primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
-        }
-
-        a {
-            color: var(--docuhub-white);
-            text-align: center;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        /* Adaptaciones para móviles pequeños */
-        @media (max-width: 480px) {
-            form {
-                padding: 1.5rem;
-                gap: 1rem;
-            }
-            
-            input, button {
-                padding: 0.7rem;
-            }
-            
-            h2 {
-                margin-bottom: 1rem;
-            }
-        }
-
-        /* Efecto de teclado en móviles */
-        @media (max-height: 600px) {
-            body {
-                justify-content: flex-start;
-                padding-top: 2rem;
-            }
+        
+        .logo-text {
+            background: linear-gradient(to right, #E0E7FF, #BFDBFE);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
     </style>
 </head>
-<body>
-    <div>
-        <h2>DocumentHub</h2>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col items-center justify-center p-4 relative overflow-hidden font-['Inter']">
+    <!-- Partículas animadas (se generarán con JS) -->
+    <div id="particles"></div>
+
+    <!-- Logo y Título -->
+    <div class="flex flex-col items-center mb-10 z-10">
+         <!-- Contenedor del logo con imagen -->
+         <div class="w-20 h-20 mb-4 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]">
+            <img th:src="@{/img/iconoSistemaDoc.png}" alt="Logo DocumentHub" class="w-full h-full object-contain">
+        </div>
+
+        <!-- Título con efecto de gradiente -->
+        <h1 class="text-4xl font-bold logo-text tracking-tight mb-1">DocumentHub</h1>
+        <p class="text-slate-300 text-sm font-medium">Gestión Documental Inteligente</p>
     </div>
-    <form th:action="@{/login}" method="post">
-        <input type="text" name="username" placeholder="Usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">Iniciar sesión</button>
-        <a th:href="@{/registro}">¿No tienes cuenta? Regístrate</a>
+
+    <!-- Formulario -->
+    <form th:action="@{/login}" method="post"
+        class="backdrop-blur-lg bg-slate-800/50 border border-slate-600/20 rounded-2xl p-10 max-w-md w-full space-y-6 shadow-2xl">
+        <div class="space-y-4">
+            <input type="text" name="username" placeholder="Usuario" required
+                class="w-full px-5 py-3.5 bg-slate-900/70 border border-slate-600/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 transition-all">
+
+            <input type="password" name="password" placeholder="Contraseña" required
+                class="w-full px-5 py-3.5 bg-slate-900/70 border border-slate-600/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 transition-all">
+        </div>
+
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800">
+            Iniciar Sesión
+        </button>
+
+        <div class="flex justify-center pt-4">
+            <a th:href="@{/registro}" class="text-slate-400 hover:text-blue-300 text-sm font-medium transition-colors hover:underline">
+                Crear cuenta
+            </a>
+        </div>
     </form>
+
+    <script>
+        // Efecto de partículas
+        document.addEventListener('DOMContentLoaded', () => {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 20 : 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Opacidad aleatoria
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                // Animación
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
 </body>
+
 </html>
 
 <!-- <!DOCTYPE html>
