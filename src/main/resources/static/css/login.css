@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-50vh) translateX(20px);
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(0);
+    }
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(59, 130, 246, 0.15);
+    border-radius: 50%;
+    z-index: -1;
+    animation: float linear infinite;
+}
+
+.logo-text {
+    background: linear-gradient(to right, #E0E7FF, #BFDBFE);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}

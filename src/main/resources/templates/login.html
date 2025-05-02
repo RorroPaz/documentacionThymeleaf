@@ -4,47 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+    <link th:href="@{/css/login.css}" rel="stylesheet">
     <link rel="shortcut icon" href="/iconoSistemaDoc.ico" />
     <title>Login - DocumentHub</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-50vh) translateX(20px); }
-            100% { transform: translateY(-100vh) translateX(0); }
-        }
-        
-        .particle {
-            position: absolute;
-            background-color: rgba(59, 130, 246, 0.15);
-            border-radius: 50%;
-            z-index: -1;
-            animation: float linear infinite;
-        }
-        
-        .logo-text {
-            background: linear-gradient(to right, #E0E7FF, #BFDBFE);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-    </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col items-center justify-center p-4 relative overflow-hidden font-['Inter']">
+<body
+    class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col items-center justify-center p-4 relative overflow-hidden font-['Inter']">
     <!-- Partículas animadas (se generarán con JS) -->
     <div id="particles"></div>
 
     <!-- Logo y Título -->
     <div class="flex flex-col items-center mb-10 z-10">
-         <!-- Contenedor del logo con imagen -->
-         <div class="w-20 h-20 mb-4 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]">
+        <!-- Contenedor del logo con imagen -->
+        <div class="w-20 h-20 mb-4 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]">
             <img th:src="@{/img/iconoSistemaDoc.png}" alt="Logo DocumentHub" class="w-full h-full object-contain">
         </div>
 
@@ -70,44 +44,15 @@
         </button>
 
         <div class="flex justify-center pt-4">
-            <a th:href="@{/registro}" class="text-slate-400 hover:text-blue-300 text-sm font-medium transition-colors hover:underline">
+            <a th:href="@{/registro}"
+                class="text-slate-400 hover:text-blue-300 text-sm font-medium transition-colors hover:underline">
                 Crear cuenta
             </a>
         </div>
     </form>
-
-    <script>
-        // Efecto de partículas
-        document.addEventListener('DOMContentLoaded', () => {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = window.innerWidth < 768 ? 20 : 40;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Tamaño aleatorio
-                const size = Math.random() * 6 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Posición aleatoria
-                particle.style.left = `${Math.random() * 100}vw`;
-                particle.style.top = `${Math.random() * 100}vh`;
-                
-                // Opacidad aleatoria
-                particle.style.opacity = Math.random() * 0.3 + 0.1;
-                
-                // Animación
-                const duration = Math.random() * 20 + 10;
-                particle.style.animationDuration = `${duration}s`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        });
-    </script>
+    <!-- Los scripts van antes del cierre del body -->
+    <script th:src="@{/js/hola.js}"></script>
 </body>
-
 </html>
 
 <!-- <!DOCTYPE html>
