@@ -1,14 +1,15 @@
-# Usamos una imagen base con Java 17
+# Etapa 1: Compilar la app con Maven
+FROM maven:3.9.4-eclipse-temurin-17 AS build
+
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Etapa 2: Ejecutar la app compilada
 FROM eclipse-temurin:17-jdk-alpine
 
-# Directorio de trabajo dentro del contenedor
 WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-# Copia el jar compilado al contenedor
-COPY target/*.jar app.jar
-
-# Puerto expuesto (ajusta si usas otro)
 EXPOSE 8080
-
-# Comando para ejecutar la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
