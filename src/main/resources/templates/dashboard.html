@@ -108,7 +108,7 @@
                 <p class="text-gray-600 mb-6">Gestiona tus documentos y módulos desde este panel</p>
                 
                 <!-- Acciones rápidas -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                     <!-- Mostrar solo si es ADMIN -->
                     <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="bg-blue-50 border border-blue-100 rounded-lg p-4 hover:bg-blue-100 transition cursor-pointer">
                         <a th:href="@{/admin/crear-admin}" class="flex items-center">
@@ -122,6 +122,7 @@
                         </a>
                     </div>
                     
+                    <!-- Formulario Basico  
                     <div class="bg-green-50 border border-green-100 rounded-lg p-4 hover:bg-green-100 transition cursor-pointer">
                         <a th:href="@{/formulario-modulo}" class="flex items-center">
                             <div class="bg-green-500 text-white p-3 rounded-lg mr-4">
@@ -133,6 +134,7 @@
                             </div>
                         </a>
                     </div>
+                    -->
                     
                     <div class="bg-purple-50 border border-purple-100 rounded-lg p-4 hover:bg-purple-100 transition cursor-pointer">
                         <a th:href="@{/formulario-modulo-avanzado}" class="flex items-center">
@@ -140,14 +142,14 @@
                                 <i class="fas fa-file-code"></i>
                             </div>
                             <div>
-                                <h3 class="font-medium text-purple-800">Formulario Avanzado</h3>
-                                <p class="text-sm text-purple-600">Registro completo</p>
+                                <h3 class="font-medium text-purple-800">Crear Documento</h3>
+                                <p class="text-sm text-purple-600">Registra aqui tu documentacion</p>
                             </div>
                         </a>
                     </div>
                 </div>
                 
-                <!-- Formulario de ejemplo -->
+                <!-- Formulario de ejemplo 
                 <div class="border-t border-gray-200 pt-6">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-paper-plane mr-2 text-blue-500"></i> Enviar Mensaje
@@ -189,7 +191,7 @@
                     </form>
                 </div>
                 
-                <!-- Mostrar resultado si existe -->
+                 Mostrar resultado si existe 
                 <div th:if="${resultado}" class="mt-8 bg-green-50 border-l-4 border-green-500 p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
@@ -201,6 +203,7 @@
                         </div>
                     </div>
                 </div>
+            -->
             </div>
         </div>
     </main>

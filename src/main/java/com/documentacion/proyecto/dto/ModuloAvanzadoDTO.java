@@ -30,7 +30,6 @@ public class ModuloAvanzadoDTO {
     @NotBlank
     private String jsp;
 
-    @NotBlank
     private String pojo;
 
     @NotBlank
