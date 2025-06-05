@@ -12,19 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.documentacion.proyecto.dto.ApiDataDTO;
 import com.documentacion.proyecto.dto.ModuloAvanzadoDTO;
 
-import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
@@ -44,8 +40,10 @@ public class ModuloAvanzadoController {
             @ModelAttribute ModuloAvanzadoDTO moduloADTO,
             Model model) {
 
-        System.out.println(moduloADTO.toString());
-        System.out.println(moduloADTO.getApis());
+        // System.out.println(moduloADTO.toString());
+        // System.out.println(moduloADTO.getApis());
+        // moduloADTO.setJavascript(moduloADTO.getJavascript()+".java");
+        System.out.println(moduloADTO.getTablas());
         model.addAttribute("modulo", moduloADTO);
         return "resultadoAvanzado";
     }
@@ -152,6 +150,7 @@ public class ModuloAvanzadoController {
     public String editarFormulario(
         @ModelAttribute ModuloAvanzadoDTO moduloEditar,
         Model model){
+        System.out.println(moduloEditar.getApis());
         model.addAttribute("moduloForm", moduloEditar);
         return "formulario-modulo-avanzado";
     }

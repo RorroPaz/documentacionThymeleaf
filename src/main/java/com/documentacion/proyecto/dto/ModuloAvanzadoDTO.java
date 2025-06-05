@@ -44,5 +44,7 @@ public class ModuloAvanzadoDTO {
     @NotBlank
     private String controlador;
 
-    private List<ApiDataDTO> apis = new ArrayList<>(); //Para que exista un objeto antes de darle valores
+    private List<ApiDataDTO> apis = new ArrayList<>(); //Para que exista el objeto inicializado y poderle dar valores
+    
+    private List<TablaDTO> tablas = new ArrayList<>(); //Para que exista el objeto inicializado y poderle dar valores
 }

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro de Módulo</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form th:action="@{/procesar-modulo-avanzado}" th:object="${moduloForm}" method="post">
+        <!-- Pestañas principales -->
+        <div>
+            <button type="button" data-tab="informacion" onclick="switchMainTab('informacion')">Información Básica</button>
+            <button type="button" data-tab="tablas" onclick="switchMainTab('tablas')">Tablas Utilizadas</button>
+            <button type="button" data-tab="apis" onclick="switchMainTab('apis')">APIs</button>
+        </div>
+        
+        <!-- Información Básica -->
+        <div id="informacion-tab">
+            <div>
+                <label>Elaborado por:</label>
+                <input type="text" th:field="*{personaElaboro}" required>
+            </div>
+            <!-- Resto de campos básicos... -->
+        </div>
+        
+        <!-- Tablas Utilizadas -->
+        <div id="tablas-tab" style="display:none">
+            <div id="tablesTabContainer">
+                <button th:each="tabla, iterStat : *{tablas}" 
+                        th:data-table-index="${iterStat.index}"
+                        th:onclick="'switchTableTab(this)'">
+                    <span th:text="${tabla.nombre} ?: 'Tabla ' + (iterStat.index + 1)"></span>
+                    <button th:if="${!iterStat.first}" th:onclick="'removeTable(event, this)'">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </button>
+            </div>
+            
+            <div id="tablesContentContainer">
+                <div th:each="tabla, iterStat : *{tablas}" th:data-table-index="${iterStat.index}">
+                    <div>
+                        <label>Nombre de la Tabla</label>
+                        <input type="text" th:field="*{tablas[__${iterStat.index}__].nombre}" required>
+                    </div>
+                    
+                    <div>
+                        <label>Columnas</label>
+                        <button th:onclick="'addColumn(this)'">Agregar Columna</button>
+                        
+                        <div>
+                            <div th:each="col, colStat : *{tablas[__${iterStat.index}__].columnas}">
+                                <input type="text" th:field="*{tablas[__${iterStat.index}__].columnas[__${colStat.index}__]}" required>
+                                <button th:onclick="'removeColumn(this)'">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="button" onclick="addTable()">Agregar Tabla</button>
+        </div>
+        
+        <!-- APIs -->
+        <div id="apis-tab" style="display:none">
+            <div id="apis-container">
+                <div th:each="api, iterStat : *{apis}">
+                    <div>
+                        <label>Nombre API:</label>
+                        <input type="text" th:field="*{apis[__${iterStat.index}__].nombreApi}" required>
+                    </div>
+                    <!-- Resto de campos de API... -->
+                </div>
+            </div>
+            <button type="button" id="btn-add-api">Agregar otra API</button>
+        </div>
+        
+        <button type="submit">Guardar Módulo</button>
+    </form>
+
+    <!-- Templates -->
+    <template id="tableTabTemplate">
+        <button type="button" data-table-index="0" onclick="switchTableTab(this)">
+            <span>Tabla 1</span>
+            <button type="button" onclick="removeTable(event, this)">
+                <i class="fas fa-times"></i>
+            </button>
+        </button>
+    </template>
+
+    <template id="tableContentTemplate">
+        <div data-table-index="0">
+            <div>
+                <label>Nombre de la Tabla</label>
+                <input type="text" name="tablas[0].nombre" required>
+            </div>
+            
+            <div>
+                <label>Columnas</label>
+                <button onclick="addColumn(this)">Agregar Columna</button>
+                <div class="columns-container"></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="columnTemplate">
+        <div>
+            <input type="text" name="tablas[0].columnas" placeholder="Nombre de la columna" required>
+            <button onclick="removeColumn(this)">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    </template>
+
+    <script>
+        // Variables y funciones básicas
+        let tableCount = 0;
+        
+        function switchMainTab(tabName) {
+            document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+        }
+        
+        function addTable() {
+            const newIndex = tableCount++;
+            const newTab = document.createElement('button');
+            newTab.setAttribute('data-table-index', newIndex);
+            newTab.innerHTML = `Tabla ${newIndex + 1}`;
+            
+            const newContent = document.getElementById('tableContentTemplate').content.cloneNode(true);
+            newContent.querySelector('div').setAttribute('data-table-index', newIndex);
+            
+            document.getElementById('tablesTabContainer').appendChild(newTab);
+            document.getElementById('tablesContentContainer').appendChild(newContent);
+        }
+        
+        function addColumn(button) {
+            const columnTemplate = document.getElementById('columnTemplate').content.cloneNode(true);
+            button.parentElement.querySelector('.columns-container').appendChild(columnTemplate);
+        }
+        
+        function removeColumn(button) {
+            button.closest('div').remove();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            tableCount = document.querySelectorAll('#tablesContentContainer > div').length;
+            if (tableCount === 0) addTable();
+            switchMainTab('informacion');
+        });
+    </script>
+</body>
+</html>

@@ -110,14 +110,32 @@
 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Javascript:</label>
-                                    <input type="text" th:field="*{javascript}" required 
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    <div class="flex border border-gray-300 rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                                        <input 
+                                            type="text" 
+                                            th:field="*{javascript}" 
+                                            class="flex-1 px-4 py-2 outline-none" 
+                                            id="javascriptInput"
+                                            required>
+                                        <div class="flex items-center px-3 bg-gray-100 text-gray-500 border-l border-gray-300">
+                                            .java
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">JSP:</label>
-                                    <input type="text" th:field="*{jsp}" required
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    <div class="flex border border-gray-300 rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                                        <input 
+                                            type="text" 
+                                            th:field="*{jsp}" 
+                                            class="flex-1 px-4 py-2 outline-none" 
+                                            id="jspInput"
+                                            required>
+                                        <div class="flex items-center px-3 bg-gray-100 text-gray-500 border-l border-gray-300">
+                                            .java
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -125,9 +143,17 @@
                             <div class="space-y-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">POJO:</label>
-                                    <input type="text" th:field="*{pojo}" required
-                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-
+                                    <div class="flex border border-gray-300 rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                                        <input 
+                                            type="text" 
+                                            th:field="*{pojo}" 
+                                            class="flex-1 px-4 py-2 outline-none" 
+                                            id="pojoInput"
+                                            required>
+                                        <div class="flex items-center px-3 bg-gray-100 text-gray-500 border-l border-gray-300">
+                                            .java
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div>
@@ -193,7 +219,14 @@
                                             th:oninput="'updateTableName(this)'">
                                     </div>
                                     
-                                  
+                                    <div class="flex items-center">
+                                        <input type="checkbox" 
+                                            th:field="*{tablas[__${iterStat.index}__].todasLasColumnas}"
+                                            th:id="'allColumns' + ${iterStat.index}" 
+                                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" 
+                                            th:onchange="'toggleColumns(this)'">
+                                        <label th:for="'allColumns' + ${iterStat.index}" class="ml-2 block text-gray-700">Usar todas las columnas</label>
+                                    </div>
                                 </div>
                                 
                                 <div class="columns-section">
@@ -249,7 +282,7 @@
                                         </h3>
                                         <button type="button"
                                             class="btn-remove-api bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm flex items-center transition"
-                                            th:if="${!iterStat.first}">
+                                            th:if="${iterStat.index > 0}">
                                             <i class="fas fa-trash mr-1"></i> Eliminar
                                         </button>
                                     </div>
@@ -314,7 +347,10 @@
                     
                     <!-- Botones de formulario -->
                     <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200 mt-6">
-                        
+                        <!-- <button type="reset"
+                            class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                            <i class="fas fa-undo mr-2"></i> Limpiar
+                        </button> -->
                         <button type="submit"
                             class="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center transition">
                             <i class="fas fa-save mr-2"></i> Guardar Módulo
@@ -326,6 +362,10 @@
         </div>
     </main>
     
+    <!-- <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+        
+    </div> -->
+
     <!-- Templates para el sistema de tablas dinámicas -->
     <template id="tableTabTemplate">
         <button type="button" class="flex-shrink-0 py-4 px-4 border-b-2 font-medium text-sm flex items-center border-blue-500 text-blue-600" data-table-index="0" onclick="switchTableTab(this)">
@@ -336,6 +376,33 @@
         </button>
     </template>
 
+    <!-- <template id="tableContentTemplate">
+        <div class="table-content p-4 bg-gray-50 rounded-lg mb-4" data-table-index="0">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre de la Tabla</label>
+                    <input type="text" name="tables[0].name" class="w-full px-3 py-2 border border-gray-300 rounded-md" required oninput="updateTableName(this)">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" name="tables[0].allColumns" id="allColumns0" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" onchange="toggleColumns(this)">
+                    <label for="allColumns0" class="ml-2 block text-gray-700">Usar todas las columnas</label>
+                </div>
+            </div>
+            
+            <div class="columns-section">
+                <div class="flex justify-between items-center mb-2">
+                    <label class="text-gray-700 font-medium">Columnas</label>
+                    <button type="button" onclick="addColumn(this)" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-1 rounded flex items-center">
+                        <i class="fas fa-plus mr-1"></i> Agregar Columna
+                    </button>
+                </div>
+                
+                <div class="columns-container space-y-2"></div>
+            </div>
+        </div>
+    </template> -->
+
     <template id="tableContentTemplate">
         <div class="table-content p-4 bg-gray-50 rounded-lg mb-4" data-table-index="0">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
@@ -344,7 +411,10 @@
                     <input type="text" name="tablas[0].nombre" class="w-full px-3 py-2 border border-gray-300 rounded-md" required oninput="updateTableName(this)">
                 </div>
                 
-                
+                <div class="flex items-center">
+                    <input type="checkbox" name="tablas[0].todasLasColumnas" id="allColumns0" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" onchange="toggleColumns(this)">
+                    <label for="allColumns0" class="ml-2 block text-gray-700">Usar todas las columnas</label>
+                </div>
             </div>
             
             <div class="columns-section">
@@ -468,6 +538,15 @@
         function removeColumn(button) {
             button.closest('.column-item').remove();
         }
+        
+        function toggleColumns(checkbox) {
+            const columnsSection = checkbox.closest('.columns-section');
+            const inputs = columnsSection.querySelectorAll('.columns-container input');
+            
+            inputs.forEach(input => {
+                input.disabled = checkbox.checked;
+            });
+        }
 
         function addTable() {
             const tabsContainer = document.getElementById('tablesTabContainer');
@@ -515,6 +594,10 @@
             switchTableTab(newTab);
         }
 
+
+
+
+        // Manejo de inputs con .java
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializar primera pestaña
             switchMainTab('informacion');
@@ -525,7 +608,68 @@
             // Si no hay tablas, agregar una por defecto
             if (tableCount === 0) {
                 addTable();
-            } 
+            }
+                // IDs de los inputs a procesar
+                const inputIds = ['javascriptInput', 'jspInput', 'pojoInput'];
+                
+                // Función para limpiar .java
+                const cleanJavaExtension = (value) => {
+                    if (!value) return value;
+                    return value.replace(/\.java$/i, ''); // Elimina .java (case insensitive)
+                };
+                
+                // Función para mostrar feedback
+                const showFeedback = (inputElement, message) => {
+                    // Aquí puedes implementar tu lógica para mostrar feedback al usuario
+                    console.log(message, "en input:", inputElement.id);
+                    // Ejemplo: mostrar un tooltip o mensaje cerca del input
+                };
+                
+                // Procesar cada input
+                inputIds.forEach(id => {
+                    const input = document.getElementById(id);
+                    
+                    if (!input) {
+                        console.warn(`Input con ID '${id}' no encontrado`);
+                        return;
+                    }
+                    
+                    // 1. Limpiar al cargar si viene con .java
+                    if (input.value) {
+                        const cleanedValue = cleanJavaExtension(input.value);
+                        if (cleanedValue !== input.value) {
+                            input.value = cleanedValue;
+                        }
+                    }
+                    
+                    // 2. Escuchar cambios en tiempo real
+                    input.addEventListener('input', function() {
+                        const cursorPosition = this.selectionStart;
+                        const cleanedValue = cleanJavaExtension(this.value);
+                        
+                        if (cleanedValue !== this.value) {
+                            this.value = cleanedValue;
+                            // Restaurar posición del cursor
+                            const newCursorPos = Math.min(cursorPosition, cleanedValue.length);
+                            this.setSelectionRange(newCursorPos, newCursorPos);
+                            
+                            // Mostrar feedback
+                            showFeedback(this, 'La extensión .java se agregará automáticamente');
+                        }
+                    });
+                    
+                    // 3. Manejar pegado de texto
+                    input.addEventListener('paste', function(e) {
+                        // Pequeño retraso para permitir que el pegado se complete
+                        setTimeout(() => {
+                            const cleanedValue = cleanJavaExtension(this.value);
+                            if (cleanedValue !== this.value) {
+                                this.value = cleanedValue;
+                                showFeedback(this, 'Se eliminó .java del texto pegado');
+                            }
+                        }, 10);
+                    });
+                });
         });
     </script>
 
@@ -620,4 +764,4 @@
         }); // <-- Esta es la llave de cierre que faltaba
     </script>
 </body>
-</html>|
+</html>
